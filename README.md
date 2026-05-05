@@ -39,7 +39,8 @@ pip install -r requirements.txt
 git clone https://github.com/facebookresearch/detectron2.git
 python -m pip install -e detectron2
 ```
-* Follow installation setup for each model you are evaluating, refer to their README
+* Follow installation setup for each model you are evaluating, refer to their README and if necessary create it separate conda env.
+* Refer to scripts/run_X.sh for each model X script and modify the conda environment if needed or use the common pixfounadtion2
 
 ## Synthetic Dataset Setup
 * Download [MeVIS](https://huggingface.co/datasets/FudanCVL/MeViSv2).
@@ -81,6 +82,17 @@ python datasets_/test_loaders.py --config-file configs/mevis.yaml --dataset_root
 * You can follow similar procedure to [Molmo2Track](https://huggingface.co/datasets/allenai/Molmo2-VideoTrackEval).
 
 ## Benchmarking Video MLLMs
+* Due to the anonymity we only provide the modified Sa2VA loader for our benchmarking, modify accordingly and use the following SHA commit
+```
+git checkout c94a50776e61515d72c5fe1839d3676e27082237
+mv datasets_/sa2va_refVOS.py projects/llava_sam2/evaluation/dataset/refVOS.py
+```
+
+* Run common bash script to run the benchmarking
+```
+cd scripts
+bash run_all.sh
+```
 
 # References
 
