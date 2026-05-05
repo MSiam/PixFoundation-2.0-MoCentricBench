@@ -1,7 +1,7 @@
 # PixFoundation-2.0: Do Video Multi-Modal LLMs Use Motion in Visual Grounding?
 
 Official implementation of our work PixFoundation 2.0.
-* This codebase only documents the motion existence and motion ordering probes and the evaluation of three SOA video MLLMs: RGA, Sa2VA and GPT-5.0 to showcase the reproducability of the major evaluation and benchmarking part of our work. The motion-centric adaptation is not included.
+* This codebase only documents the motion existence and motion ordering probes and the evaluation of three SOA video MLLMs: RGA, Sa2VA and GPT-5.0 to showcase the reproducability of the major evaluation and benchmarking part of our work. The motion-centric adaptation will be made publicly available upon acceptance.
 
 ## Motion-Centric Benchmark (MoCentric-Bench)
 
@@ -9,7 +9,7 @@ Official implementation of our work PixFoundation 2.0.
 <img src="imgs/overview_1.png" width="70%" height="70%"><br><br>
 </div>
 
-## Benchmarking Pixel-level video MLLMs for visual grounding, specifically referring video segmentation
+## Benchmarking Pixel-level video MLLMs for visual grounding (RefVOS)
 
 <div align="center">
 <img src="imgs/overview_2.png" width="70%" height="70%"><br><br>
@@ -39,8 +39,8 @@ pip install -r requirements.txt
 git clone https://github.com/facebookresearch/detectron2.git
 python -m pip install -e detectron2
 ```
-* Follow installation setup for each model you are evaluating, refer to their README and if necessary create it separate conda env.
-* Refer to scripts/run_X.sh for each model X script and modify the conda environment if needed or use the common pixfounadtion2
+* Follow installation setup for each model you are evaluating, refer to their README and if necessary create its separate conda env.
+* Refer to scripts/run_X.sh for each model X script and modify the conda environment if needed or use the common pixfoundation2
 
 ## Synthetic Dataset Setup
 * Download [MeVIS](https://huggingface.co/datasets/FudanCVL/MeViSv2).
@@ -81,7 +81,7 @@ python datasets_/test_loaders.py --config-file configs/mevis.yaml --dataset_root
 ```
 * You can follow similar procedure to [Molmo2Track](https://huggingface.co/datasets/allenai/Molmo2-VideoTrackEval).
 
-## Benchmarking Video MLLMs
+## Evaluation
 * Due to the anonymity we only provide the modified Sa2VA loader for our benchmarking, modify accordingly and use the following SHA commit
 ```
 git checkout c94a50776e61515d72c5fe1839d3676e27082237
