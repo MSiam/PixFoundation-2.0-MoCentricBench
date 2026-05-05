@@ -1,0 +1,86 @@
+# PixFoundation-2.0: Do Video Multi-Modal LLMs Use Motion in Visual Grounding?
+
+Official implementation of our work PixFoundation 2.0.
+* This codebase only documents the motion existence and motion ordering probes and the evaluation of three SOA video MLLMs: RGA, Sa2VA and GPT-5.0 to showcase the reproducability of the major evaluation and benchmarking part of our work. The motion-centric adaptation and older models are not included.
+
+## Motion-Centric Benchmark (MoCentric-Bench)
+
+<div align="center">
+<img src="imgs/overview_1.png" width="70%" height="70%"><br><br>
+</div>
+
+## Benchmarking Pixel-level video MLLMs for visual grounding, specifically referring video segmentation
+
+<div align="center">
+<img src="imgs/overview_2.png" width="70%" height="70%"><br><br>
+</div>
+
+<div align="justify">
+Multi-modal large language models (MLLMs) have shown impressive generalization across tasks using images and text modalities. While their extension to video has enabled tasks such as video question answering and video captioning, their pixel-level visual grounding abilities are less studied. In this work, we raise the pertinent question of whether motion is used in pixel-level visual grounding and whether video MLLMs can segment objects based on natural language expressions describing their motion patterns. We identify the shortcomings in the current benchmarks, where we show that a single frame can often suffice for capturing the referring expression without any temporal reasoning. To address this, we introduce novel motion-centric probing, particularly designed for the visual grounding task, to study video MLLMs' ability to identify true motion from a fake one and their ability to grasp the ordering of motion. Consequently, we introduce MoCentric-Bench, a motion-centric benchmark designed to evaluate video MLLMs based on their ability to capture the interaction between motion and language, rather than relying primarily on static cues. We further establish strong single-image baselines that either match or surpass prior methods. Finally, we explore a simple motion-centric adaptation that provides state-of-the-art performance on our MoCentric-Bench.
+</div>
+
+## Installation
+
+* Clone the repository recursively to include the submodules
+```
+git clone --recursive ANON_GIT_URL
+```
+* Create conda environment
+```
+conda create --name pixfoundation2 python=3.10
+conda activate pixfoundation2
+```
+* Install the base requirements for evaluations
+```
+pip install -r requirements.txt
+```
+* Setup detectron2 for some utilities used (**Optional**)
+```
+git clone https://github.com/facebookresearch/detectron2.git
+python -m pip install -e detectron2
+```
+* Follow installation setup for each model you are evaluating, refer to their README
+
+## Synthetic Dataset Setup
+* Download [MeVIS](https://huggingface.co/datasets/FudanCVL/MeViSv2).
+* Generate the multi-video-layout. Layouts l2, l3
+```
+python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --frames_sel_file data/mevis_keyframes.csv --output_dir OUT_DIR
+python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --frames_sel_file data/mevis_keyframes.csv --output_dir OUT_DIR --left_flag
+python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --output_dir OUT_DIR --reverse_flag
+python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --output_dir OUT_DIR --reverse_flag --left_flag
+```
+* Move the reverse expressions under data/meta_expressions_reverse_filtered.json to the valid_u subset path.
+
+* The final MeVIS directory is as follows:
+```
+|--- MeVIS
+   |--- train
+      |--- JPEGImages
+      |--- mask_dict.json
+      |--- meta_expressions.json
+      |--- meta_expressions_reverse_filtered.json
+   |--- valid_u
+      |--- JPEGImages
+      |--- mask_dict.json
+      |--- meta_expressions.json
+   |--- valid_u_mocentric_tile_single
+      |--- JPEGImages
+   |--- valid_u_mocentric_tile_single_left
+      |--- JPEGImages
+   |--- valid_u_mocentric_tile_reverse
+      |--- JPEGImages
+   |--- valid_u_mocentric_tile_reverse_left
+      |--- JPEGImages
+```
+
+* Visualize the synthetic dataset
+```
+python datasets_/test_loaders.py --dataset_root DATA_ROOT --dataset_split mevis_val_mocentric_tile_single --dataset_mask_path DATA_ROOT/valid_u/mask_dict.json --dataset_exp_path DATA_ROOT/valid_u/meta_expressions.json --out_dir OUT_DIR --save_vis
+```
+* You can follow similar procedure to [Molmo2Track](https://huggingface.co/datasets/allenai/Molmo2-VideoTrackEval).
+
+## Benchmarking Video MLLMs
+
+# References
+
