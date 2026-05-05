@@ -119,7 +119,9 @@ def sub_processor(pid, cfg, args, selected_frames):
             try:
                 selected_frame = selected_frames[video_name+'_'+exp_id]
                 assert selected_frame['video_name']==video_name, "wrong video"
+                selected_frame['frame'] = os.path.join(args.dataset_root, selected_frame['frame'])
             except:
+                # In case of failures in the keyframe selection itself, rare occurrence
                 selected_frame = {'frame': frames[0]}
 
             selected_image = np.array(Image.open(selected_frame['frame']))
