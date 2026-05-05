@@ -39,9 +39,8 @@ def main(args):
 
     register_all_mevis(args.dataset_root)
 
-    if args.single_flag:
-#    if not args.reverse_flag or args.single_flag:
-        # Load selected keyframes only when single flag
+    if args.frames_sel_file != '':
+        # Load selected keyframes
         if 'csv' in args.frames_sel_file:
             selected_frames = pd.read_csv(args.frames_sel_file)
             selected_frames['exp_id_str'] = selected_frames['exp_id'].apply(str)
@@ -59,6 +58,7 @@ def main(args):
     else:
         selected_frames = None
 
+    # Code supports multiprocessing, but temporarily I disabled MP
     sub_processor(0, cfg, args, selected_frames)
 
 def sub_processor(pid, cfg, args, selected_frames):
@@ -163,10 +163,10 @@ if __name__ == '__main__':
     parser.add_argument('--output_dir', type=str, default='')
     parser.add_argument('--dataset_root', type=str, default='')
     parser.add_argument('--dataset_split', type=str, default='mevis_val')
-    parser.add_argument('--frames_sel_file', type=str, default='frames_sel.csv')
+    parser.add_argument('--frames_sel_file', type=str, default='')
     parser.add_argument('--left_flag', action="store_true") # Used for SingleFrame + Concat & Reverse + Concat
     parser.add_argument('--up_flag', action="store_true") # Used for SingleFrame + Concat & Reverse + Concat
-    parser.add_argument('--single_flag', action="store_true") # Only single flag no Concat
+    parser.add_argument('--single_flag', action="store_true") # Used for single static frame only without Conct
     parser.add_argument('--reverse_flag', action="store_true")# Switches to Reverse + Concat, default is Single Frame + Concat
     parser.add_argument('--black_flag', action="store_true")
     parser.add_argument('--single_first_flag', action="store_true")

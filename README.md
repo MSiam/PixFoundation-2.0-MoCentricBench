@@ -1,7 +1,7 @@
 # PixFoundation-2.0: Do Video Multi-Modal LLMs Use Motion in Visual Grounding?
 
 Official implementation of our work PixFoundation 2.0.
-* This codebase only documents the motion existence and motion ordering probes and the evaluation of three SOA video MLLMs: RGA, Sa2VA and GPT-5.0 to showcase the reproducability of the major evaluation and benchmarking part of our work. The motion-centric adaptation and older models are not included.
+* This codebase only documents the motion existence and motion ordering probes and the evaluation of three SOA video MLLMs: RGA, Sa2VA and GPT-5.0 to showcase the reproducability of the major evaluation and benchmarking part of our work. The motion-centric adaptation is not included.
 
 ## Motion-Centric Benchmark (MoCentric-Bench)
 
@@ -45,12 +45,12 @@ python -m pip install -e detectron2
 * Download [MeVIS](https://huggingface.co/datasets/FudanCVL/MeViSv2).
 * Generate the multi-video-layout. Layouts l2, l3
 ```
-python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --frames_sel_file data/mevis_keyframes.csv --output_dir OUT_DIR
-python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --frames_sel_file data/mevis_keyframes.csv --output_dir OUT_DIR --left_flag
-python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --output_dir OUT_DIR --reverse_flag
-python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --output_dir OUT_DIR --reverse_flag --left_flag
+python data/create_benchmark_mevis.py --config-file configs/mevis.yaml --dataset_root DATA_ROOT --frames_sel_file data/mevis_keyframes.csv --output_dir OUT_DIR
+python data/create_benchmark_mevis.py --config-file configs/mevis.yaml --dataset_root DATA_ROOT --frames_sel_file data/mevis_keyframes.csv --output_dir OUT_DIR --left_flag
+python data/create_benchmark_mevis.py --config-file configs/mevis.yaml --dataset_root DATA_ROOT --output_dir OUT_DIR --reverse_flag
+python data/create_benchmark_mevis.py --config-file configs/mevis.yaml --dataset_root DATA_ROOT --output_dir OUT_DIR --reverse_flag --left_flag
 ```
-* Move the reverse expressions under data/meta_expressions_reverse_filtered.json to the valid_u subset path.
+* Move our reverse expressions under data/meta_expressions_reverse_filtered.json to the valid_u subset path.
 
 * The final MeVIS directory is as follows:
 ```
@@ -59,11 +59,11 @@ python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --output_dir OUT_
       |--- JPEGImages
       |--- mask_dict.json
       |--- meta_expressions.json
-      |--- meta_expressions_reverse_filtered.json
    |--- valid_u
       |--- JPEGImages
       |--- mask_dict.json
       |--- meta_expressions.json
+      |--- meta_expressions_reverse_filtered.json
    |--- valid_u_mocentric_tile_single
       |--- JPEGImages
    |--- valid_u_mocentric_tile_single_left
@@ -74,9 +74,9 @@ python data/create_benchmark_mevis.py --dataset_root DATA_ROOT --output_dir OUT_
       |--- JPEGImages
 ```
 
-* Visualize the synthetic dataset
+* Visualize the synthetic dataset with the segmentation masks
 ```
-python datasets_/test_loaders.py --dataset_root DATA_ROOT --dataset_split mevis_val_mocentric_tile_single --dataset_mask_path DATA_ROOT/valid_u/mask_dict.json --dataset_exp_path DATA_ROOT/valid_u/meta_expressions.json --out_dir OUT_DIR --save_vis
+python datasets_/test_loaders.py --config-file configs/mevis.yaml --dataset_root DATA_ROOT --dataset_split mevis_val_mocentric_tile_single --dataset_mask_path DATA_ROOT/valid_u/mask_dict.json --dataset_exp_path DATA_ROOT/valid_u/EXPRS_JSON --out_dir OUT_DIR --save_vis
 ```
 * You can follow similar procedure to [Molmo2Track](https://huggingface.co/datasets/allenai/Molmo2-VideoTrackEval).
 
