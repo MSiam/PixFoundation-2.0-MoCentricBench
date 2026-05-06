@@ -15,4 +15,6 @@ eval "$(conda shell.bash hook)"
 conda deactivate
 conda activate pixfoundation2
 
-python ../../infer/refVOS/infer_gpt.py --config-file ../../configs/mevis.yaml --output_dir=${OUTPUT_DIR} --dataset_split $DATASPLIT --dataset_type ${DATATYPE} --image_prefix_root_flip=${DATAFLIP} --dataset_root=${DATA} --sam_type ${SAMTYPE} --sam_ckpt ${SAMCKPT} --start_index $START 
+export PYTHONPATH=$PWD/../:$PYTHONPATH
+
+python ../infer/infer_gpt.py --config-file ../configs/mevis.yaml --output_dir=${OUTPUT_DIR} --dataset_split $DATASPLIT --dataset_type ${DATATYPE} --image_prefix_root_flip=${DATAFLIP} --dataset_root=${DATA} --sam_type ${SAMTYPE} --sam_ckpt ${SAMCKPT} --start_index $START 

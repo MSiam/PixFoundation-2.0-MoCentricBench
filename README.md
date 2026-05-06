@@ -85,7 +85,7 @@ python datasets_/test_loaders.py --config-file configs/mevis.yaml --dataset_root
 * Due to the anonymity we only provide the modified Sa2VA loader for our benchmarking, modify accordingly and use the following SHA commit
 ```
 git checkout c94a50776e61515d72c5fe1839d3676e27082237
-mv datasets_/sa2va_refVOS.py projects/llava_sam2/evaluation/dataset/refVOS.py
+cp datasets_/sa2va_refVOS.py Sa2VA/projects/llava_sam2/evaluation/dataset/refVOS.py
 ```
 
 * Run common bash script to run the benchmarking

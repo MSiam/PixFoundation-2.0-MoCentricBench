@@ -4,7 +4,11 @@ OUT=$3
 CKPT=$4
 FLIP=$5
 
-# Using Sa2VA pipeline as is 
+source ~/.bashrc
+eval "$(conda shell.bash hook)"
+conda deactivate
+conda activate sa2va
+
 export PYTHONPATH=$PWD/../Sa2VA/:$PYTHONPATH
 
 ARGS="${CKPT} --dataset ${DATATYPE} --dataset_root ${DATA} --work_dir ${OUT}"
@@ -14,4 +18,4 @@ then
     ARGS="$ARGS --flip"
 fi
 
-python ../../infer/refVOS/infer_sa2va.py ${ARGS}
+python ../infer/infer_sa2va.py ${ARGS}

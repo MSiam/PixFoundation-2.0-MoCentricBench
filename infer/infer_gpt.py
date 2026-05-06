@@ -20,11 +20,6 @@ from configs.cfg import setup_cfg
 from datasets_.mevis_variants.mevis_dataset_mapper import MeViSDatasetMapper
 from datasets_.mevis_variants.mevis_build import build_detection_test_loader, register_all_mevis, \
                                                 _PREDEFINED_SPLITS_mevis
-from datasets_.mocentric_bench_variants.mocentric_bench_dataset_mapper import MoCentricBenchDatasetMapper
-from datasets_.mocentric_bench_variants.mocentric_bench_build import build_detection_test_loader as \
-                                                                        build_detection_test_loader_mocentric_bench
-from datasets_.mocentric_bench_variants.mocentric_bench_build import register_all_mocentric_bench, \
-                                                                        _PREDEFINED_SPLITS_mocentric_bench
 
 from segment_anything import sam_model_registry, SamPredictor
 from sam2.build_sam import build_sam2_video_predictor

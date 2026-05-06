@@ -4,8 +4,6 @@ TILE=$3
 SINGLE=$4
 REVERSE=$5
 KEYFRAMESFILE=$6
-STATICEXP=$7
-UPFLAG=$8
 
 ARGS="--mevis_mask_path ${DATA}/valid_u/mask_dict.json --mevis_pred_path ${PREDDIR} --save_name ${PREDDIR}/results.json --num_workers 4 --frames_selection_file ${KEYFRAMESFILE}"
 
@@ -27,14 +25,4 @@ else
 
 fi
 
-if [ $STATICEXP == "True" ]
-then
-    ARGS="$ARGS --filterout_static_exprs"
-fi
-
-if [ $UPFLAG == "True" ]
-then
-    ARGS="$ARGS --up_flag"
-fi
-
-python ../../eval/eval_mevis_variants.py $ARGS
+python ../eval/eval_mevis_variants.py $ARGS
