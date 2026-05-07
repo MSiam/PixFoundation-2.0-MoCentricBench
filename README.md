@@ -1,7 +1,7 @@
 # PixFoundation-2.0: Do Video Multi-Modal LLMs Use Motion in Visual Grounding?
 
 Official implementation of our work PixFoundation 2.0.
-* This codebase only documents the motion existence and motion ordering probes and the evaluation of three SOA video MLLMs: RGA, Sa2VA and GPT-5.0 to showcase the reproducability of the major evaluation and benchmarking part of our work. The motion-centric adaptation will be made publicly available upon acceptance.
+* This codebase only documents the motion existence and motion ordering probes and the evaluation of three SOA video MLLMs: RGA, Sa2VA and GPT-5.0 to showcase the reproducability of the major evaluation and benchmarking part of our work and baselines. The motion-centric adaptation will be made publicly available upon acceptance.
 
 ## Motion-Centric Benchmark (MoCentric-Bench)
 

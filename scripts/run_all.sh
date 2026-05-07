@@ -100,3 +100,4 @@ echo "Sa2VA Inference Done"
 echo "GPT Eval"
 bash run_eval_mevis.sh $DATA_ROOT ${OUT_ROOT}/GPT_outputs/mevis_validu_tile_reverse/ True False True None
 
+# You can do similar for the single image baselines
