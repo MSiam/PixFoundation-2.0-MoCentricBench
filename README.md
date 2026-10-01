@@ -1,7 +1,7 @@
 # PixFoundation-2.0: Do Video Multi-Modal LLMs Use Motion in Visual Grounding?
 [Project webpage](https://msiam.github.io/PixFoundationSeries/), [NeurIPS version](), [Arxiv](https://arxiv.org/abs/2509.02807)
 
-Official implementation of My work PixFoundation 2.0.
+Official implementation of My work PixFoundation 2.0 in NeurIPS 2026 Evaluations and Datasets Track.
 
 ## Motion-Centric Benchmark (MoCentric-Bench)
 
