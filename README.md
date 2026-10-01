@@ -1,7 +1,7 @@
 # PixFoundation-2.0: Do Video Multi-Modal LLMs Use Motion in Visual Grounding?
+[Project webpage](https://msiam.github.io/PixFoundationSeries/), [NeurIPS version](), [Arxiv](https://arxiv.org/abs/2509.02807)
 
-Official implementation of our work PixFoundation 2.0.
-* This codebase only documents the motion existence and motion ordering probes and the evaluation of three SOA video MLLMs: RGA, Sa2VA and GPT-5.0 to showcase the reproducability of the major evaluation and benchmarking part of our work and baselines. The motion-centric adaptation will be made publicly available upon acceptance.
+Official implementation of My work PixFoundation 2.0.
 
 ## Motion-Centric Benchmark (MoCentric-Bench)
 
@@ -23,7 +23,7 @@ Multi-modal large language models (MLLMs) have shown impressive generalization a
 
 * Clone the repository recursively to include the submodules
 ```
-git clone --recursive ANON_GIT_URL
+git clone --recursive https://github.com/MSiam/PixFoundation-2.0-MoCentricBench/
 ```
 * Create conda environment
 ```
@@ -82,17 +82,36 @@ python datasets_/test_loaders.py --config-file configs/mevis.yaml --dataset_root
 * You can follow similar procedure to [Molmo2Track](https://huggingface.co/datasets/allenai/Molmo2-VideoTrackEval).
 
 ## Evaluation
-* Due to the anonymity we only provide the modified Sa2VA loader for our benchmarking, modify accordingly and use the following SHA commit
-```
-git checkout c94a50776e61515d72c5fe1839d3676e27082237
-cp datasets_/sa2va_refVOS.py Sa2VA/projects/llava_sam2/evaluation/dataset/refVOS.py
-```
-
-* Run common bash script to run the benchmarking
+* Run common bash script to run the benchmarking after modifying the paths
 ```
 cd scripts
 bash run_all.sh
 ```
 
+## Motion Centric Adaptation
+The motion centric adaptation can be applied to any MLLM independant of the architecture relying on the synthetic training data. I provide an example with Sa2VA. The forked Sa2VA modified for motion-centric adaptation is provided [here](https://github.com/MSiam/Sa2VA/tree/Sa2va-mocentric).
+
+* Train Sa2VA and convert it to Hugging Face Checkpoint
+```
+cd scripts
+bash lora_tune_sa2va.sh
+```
+
+* Replace Sa2VA_CKPT in run_all.sh with the correct full path to hugging face checkpoint for evaluation.
+
+* Modifications for the LoRA setup including LLM instead of ViT and other hyperparameters can be added to 'Sa2VA/projects/llava_sam2/configs/sa2va_8b_motion.py'.
+
+# Acknowledgements
+* I thank [Sa2VA](https://github.com/bytedance/Sa2VA) ByteDance authors as I built the experiments for motion-centric adaptation upon their codebase.
+
 # References
+Please cite my paper if you find it useful in your research
+```
+@article{siam2026pixfoundation2.0,
+  title={PixFoundation 2.0: Do Video Multi-Modal LLMs Use Motion in Visual Grounding?},
+  author={Siam, Mennatullah},
+  journal={NeurIPS},
+  year={2026}
+}
+```
 
