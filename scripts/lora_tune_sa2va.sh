@@ -2,6 +2,6 @@
 export PYTHONPATH=${PWD}/../../Sa2VA/:$PYTHONPATH
 
 cd ${PWD}/../../Sa2VA/
-bash tools/dist.sh train projects/llava_sam2/configs/sa2va_8b.py 1
+bash tools/dist.sh train projects/llava_sam2/configs/sa2va_8b_motion.py 1
 
-python projects/llava_sam2/hf/convert_to_hf.py projects/llava_sam2/configs/sa2va_8b.py --pth-model PTH_FILE --save-path HF_CKPT_DIR
+python projects/llava_sam2/hf/convert_to_hf.py projects/llava_sam2/configs/sa2va_8b_motion.py --pth-model PTH_FILE --save-path HF_CKPT_DIR
